@@ -23,8 +23,4 @@ class Account:
 	#Input: None
 	#Output: None
 	#Action: Decides whether to make trade
-	def tradeDecision(self):
-		
-
-
-
+	#def tradeDecision(self):

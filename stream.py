@@ -29,12 +29,16 @@ def on_message(ws, message):
 
 		data = jmessage["data"]
 		closing_price = data["c"]
-		sma.SMA_5(closing_price)
-		sma.SMA_8(closing_price)
-		sma.SMA_13(closing_price)
-		print(len(sma.sma_5_arr), " minute sma: ", sma.sma_5)
-		print(len(sma.sma_8_arr), " minute sma: ", sma.sma_8)
-		print(len(sma.sma_13_arr), " minute sma: ", sma.sma_13)
+
+		sma5.add_to_SMA(closing_price)
+		sma8.add_to_SMA(closing_price)
+		sma13.add_to_SMA(closing_price)
+
+		# sma.add_SMA_5(closing_price)
+		# sma.add_SMA_8(closing_price)
+		# sma.add_SMA_13(closing_price)
+
+
 
 def on_error(ws, error):
     print(error)
@@ -43,12 +47,15 @@ def on_close(ws):
 	print("closing websocket")
 
 socket = "wss://data.alpaca.markets/stream"
-sma = SMA() #create SMA object
+sma5 = SMA(5) #create SMA object
+sma8 = SMA(8)
+sma13 = SMA(13)
 account = Account()#create account object
 ws = websocket.WebSocketApp(socket, on_open=on_open, on_message=on_message, on_error=on_error, on_close=on_close)
 ws.run_forever()
 #{"action": "authenticate","data": {"key_id": "PKRLUBACQRIGHNSJ4C78", "secret_key": "WE4mAneR9hIgXc6eHkomUY2F3puRWSNrSb0WL1Az"}}
-
+#Vinays-MacBook-Pro-2:alpaca-sma-ema vinay.shanbhagibm.com$ python3 -m venv env
+#Vinays-MacBook-Pro-2:alpaca-sma-ema vinay.shanbhagibm.com$ source env/bin/activate
 
 
 

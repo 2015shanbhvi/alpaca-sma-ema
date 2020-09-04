@@ -1,31 +1,24 @@
 import statistics
 
 class SMA:
-	def __init__(self):
-		self.sma_5_arr = []
-		self.sma_8_arr = []
-		self.sma_13_arr = []
-		self.sma_5 = 0
-		self.sma_8 = 0
-		self.sma_13 = 0
+	def __init__(self, sma_num):
+		self.sma_num = sma_num
+		self.sma_arr = []
+		self.sma = 0
 
-	def SMA_5(self, price):
 
-		if len(self.sma_5_arr) > 4:
-			self.sma_5_arr.pop(0)
-		self.sma_5_arr.append(price)
-		self.sma_5 = round(statistics.mean(self.sma_5_arr), 2)
+	def add_to_SMA(self, price):
+		#manage the length
+		if len(self.sma_arr) > self.sma_num - 1:
+			self.sma_arr.pop(0)
+		#add to it and recalculate average
+		self.sma_arr.append(price)
+		self.sma = round(statistics.mean(self.sma_arr), 2)
 
-	def SMA_8(self, price):
+		#print value, or if not ready yet
+		if len(self.sma_arr) < self.sma_num:
+			print("SMA", self.sma_num, "has ", len(self.sma_arr), "datapoints and is not ready yet")
+		else:
+			print("SMA", self.sma_num, ": ", self.sma)
 
-		if len(self.sma_8_arr) > 7:
-			self.sma_8_arr.pop(0)
-		self.sma_8_arr.append(price)
-		self.sma_8 = round(statistics.mean(self.sma_8_arr), 2)
 	
-	def SMA_13(self, price):
-
-		if len(self.sma_13_arr) > 12:
-			self.sma_13_arr.pop(0)
-		self.sma_13_arr.append(price)
-		self.sma_13 = round(statistics.mean(self.sma_13_arr), 2)
