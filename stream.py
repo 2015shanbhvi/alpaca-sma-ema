@@ -53,7 +53,6 @@ sma13 = SMA(13)
 account = Account()#create account object
 ws = websocket.WebSocketApp(socket, on_open=on_open, on_message=on_message, on_error=on_error, on_close=on_close)
 ws.run_forever()
-#{"action": "authenticate","data": {"key_id": "PKRLUBACQRIGHNSJ4C78", "secret_key": "WE4mAneR9hIgXc6eHkomUY2F3puRWSNrSb0WL1Az"}}
 #Vinays-MacBook-Pro-2:alpaca-sma-ema vinay.shanbhagibm.com$ python3 -m venv env
 #Vinays-MacBook-Pro-2:alpaca-sma-ema vinay.shanbhagibm.com$ source env/bin/activate
 
