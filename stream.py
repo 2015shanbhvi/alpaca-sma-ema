@@ -34,10 +34,6 @@ def on_message(ws, message):
 		sma8.add_to_SMA(closing_price)
 		sma13.add_to_SMA(closing_price)
 
-		# sma.add_SMA_5(closing_price)
-		# sma.add_SMA_8(closing_price)
-		# sma.add_SMA_13(closing_price)
-
 
 
 def on_error(ws, error):
