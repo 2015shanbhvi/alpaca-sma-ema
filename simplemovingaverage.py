@@ -19,11 +19,10 @@ class SMA:
 		self.pos += 1
 
 		self.sma = round(statistics.mean(self.sma_arr), 2)
-
-		
+	
 		if self.ready:
 			print("The SMA", self.sma_num, " is ready:", self.sma)
 	
 
 
-#Inheritance
+
