@@ -17,10 +17,12 @@ class Account:
 		r = requests.get(config.POSITIONS_URL, headers=config.HEADERS)
 		response = json.loads(r.content)
 		for position_obj in response:
-			self.positions[position_obj["symbol"]] = position_obj["qty"]
+			self.positions[position_obj["symbol"]] = int(position_obj["qty"])
 		print("self.positions: ", self.positions) 
 
-	#Input: None
-	#Output: None
-	#Action: Decides whether to make trade
-	#def tradeDecision(self):
+	#make sure we are at a range of [1, threshold-1] number of shares
+	#in order for us to be able to buy or sell one share
+	def getShareEligibility(self, symbol, threshold):
+		if self.positions[symbol] >= threshold or self.positions[symbol] < 1:
+			return False
+		return True

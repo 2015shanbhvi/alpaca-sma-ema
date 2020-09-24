@@ -10,7 +10,7 @@ class Crossover:
 
 
 	#takes in sma5, sma8, sma13, current price
-	#updates class variables to determine if we are golden cross
+	#updates class variables golden_cross and death_cross
 	def calculateCrossover(self, sma5, sma8, sma13, current_price):
 		#if trends are valid
 		shorter = round((sma5+current_price)/2,2)
@@ -30,6 +30,7 @@ class Crossover:
 			if not uptrend and shorter > longer:
 				print("golden cross TRUE")
 				self.golden_cross = True
+				self.death_cross = False
 
 
 			#if if short_trend is higher than long_trend
@@ -38,6 +39,7 @@ class Crossover:
 			#then we set golden_cross to False
 			elif uptrend and shorter < longer:
 				print("death cross TRUE")
+				self.golden_cross = False
 				self.death_cross = True
 
 			else:

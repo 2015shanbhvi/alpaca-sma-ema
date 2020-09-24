@@ -41,10 +41,11 @@ def on_message(ws, message):
 		#calculate crossover
 		if sma5.ready and sma8.ready and sma13.ready:
 			crossover.calculateCrossover(sma5.sma, sma8.sma, sma13.sma, closing_price)
-			if crossover.golden_cross:
-				trade.create_order("AAPL", 1, "buy", "market", "gtc")
-			elif crossover.death_cross:
-				trade.create_order("AAPL", 1, "sell", "market", "gtc")
+			if account.getShareEligibility("AAPL", 5):
+				if crossover.golden_cross:
+					trade.create_order("AAPL", 1, "buy", "market", "gtc")
+				elif crossover.death_cross:
+					trade.create_order("AAPL", 1, "sell", "market", "gtc")
 		else:
 			print("SMAs not ready")
 
