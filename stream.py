@@ -26,8 +26,6 @@ def on_message(ws, message):
 	message_type = jmessage["stream"]
 	#only print message if it is not an authorizxation or listening confirmation
 	if not message_type == "authorization" and not message_type == "listening":
-		
-		account.getPositionsDict()
 
 		data = jmessage["data"]
 		closing_price = data["c"]
@@ -38,14 +36,9 @@ def on_message(ws, message):
 		sma8.add_to_SMA(closing_price)
 		sma13.add_to_SMA(closing_price)
 
-		#calculate crossover
+		#calculate crossover and execute buy/sell if necessary
 		if sma5.ready and sma8.ready and sma13.ready:
-			crossover.calculateCrossover(sma5.sma, sma8.sma, sma13.sma, closing_price)
-			if account.getShareEligibility("AAPL", 5):
-				if crossover.golden_cross:
-					trade.create_order("AAPL", 1, "buy", "market", "gtc")
-				elif crossover.death_cross:
-					trade.create_order("AAPL", 1, "sell", "market", "gtc")
+			crossover.crossoverTradeDecision(sma5, sma8, sma13, closing_price, account, trade)
 		else:
 			print("SMAs not ready")
 

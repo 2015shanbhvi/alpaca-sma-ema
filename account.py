@@ -23,6 +23,10 @@ class Account:
 	#make sure we are at a range of [1, threshold-1] number of shares
 	#in order for us to be able to buy or sell one share
 	def getShareEligibility(self, symbol, threshold):
-		if self.positions[symbol] >= threshold or self.positions[symbol] < 1:
-			return False
-		return True
+		if symbol in self.positions.keys():
+			if self.positions[symbol] >= threshold or self.positions[symbol] < 1:
+				return False
+			else: 
+				print("Elligible to buy shares")
+				return True
+		return False

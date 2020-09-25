@@ -1,4 +1,5 @@
-
+from account import Account
+from trade import Trade
 class Crossover:
 	def __init__(self):
 		self.short_trend = 0
@@ -50,3 +51,19 @@ class Crossover:
 		#update short and long trends 
 		self.short_trend = shorter
 		self.long_trend = longer
+
+
+
+
+	def crossoverTradeDecision(self, sma5, sma8, sma13, closing_price, account, trade):
+		self.calculateCrossover(sma5.sma, sma8.sma, sma13.sma, closing_price)
+		if account.getShareEligibility("AAPL", 5):
+			if self.golden_cross:
+				print("Buying one share of AAPL")
+				trade.create_order("AAPL", 1, "buy", "market", "gtc")
+				print(account.getPositionsDict())
+			elif self.death_cross:
+				print("Selling one share of AAPL")
+				trade.create_order("AAPL", 1, "sell", "market", "gtc")
+				print(account.getPositionsDict())
+
