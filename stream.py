@@ -1,9 +1,10 @@
 import config
 import websocket, json
-from simplemovingaverage import SMA
-from crossover import Crossover
-from account import Account
-from trade import Trade
+#import obj.simplemovingaverage, obj.crossover, obj.account, obj.trade
+from obj.simplemovingaverage import SMA
+from obj.crossover import Crossover
+from obj.account import Account
+from obj.trade import Trade
 
 #Callback method on open of websocket
 def on_open(ws):
@@ -49,20 +50,20 @@ def on_error(ws, error):
 def on_close(ws):
 	print("closing websocket")
 
-
-
-
-socket = "wss://data.alpaca.markets/stream"
-sma5 = SMA(5) #create SMA object
-sma8 = SMA(8)
-sma13 = SMA(13)
-crossover = Crossover() #to calculate crossover indicators
-account = Account() #to list Account metadata
-trade = Trade()  #to place orders
-ws = websocket.WebSocketApp(socket, on_open=on_open, on_message=on_message, on_error=on_error, on_close=on_close)
-ws.run_forever()
-#Vinays-MacBook-Pro-2:alpaca-sma-ema vinay.shanbhagibm.com$ python3 -m venv env
-#Vinays-MacBook-Pro-2:alpaca-sma-ema vinay.shanbhagibm.com$ source env/bin/activate
+#Contains the websocket
+#and instantiates Crossover, Account, SMA, and Trade objects
+def stream():
+	socket = "wss://data.alpaca.markets/stream"
+	sma5 = SMA(5) #create SMA object
+	sma8 = SMA(8)
+	sma13 = SMA(13)
+	crossover = Crossover() #to calculate crossover indicators
+	account = Account() #to list Account metadata
+	trade = Trade()  #to place orders
+	ws = websocket.WebSocketApp(socket, on_open=on_open, on_message=on_message, on_error=on_error, on_close=on_close)
+	ws.run_forever()
+	#Vinays-MacBook-Pro-2:alpaca-sma-ema vinay.shanbhagibm.com$ python3 -m venv env
+	#Vinays-MacBook-Pro-2:alpaca-sma-ema vinay.shanbhagibm.com$ source env/bin/activate
 
 
 

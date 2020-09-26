@@ -1,5 +1,8 @@
 import requests, json
 import alpaca_trade_api as tradeapi
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# import ../db.py
 import config
 
 class Trade:

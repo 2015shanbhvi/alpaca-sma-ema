@@ -1,5 +1,4 @@
-from account import Account
-from trade import Trade
+
 class Crossover:
 	def __init__(self):
 		self.short_trend = 0
