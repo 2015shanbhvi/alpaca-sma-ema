@@ -25,7 +25,8 @@ def main():
 	
 	# stream()
 	# app.run(port='8080')
-	Thread(target = stream).start()
+	stream = Stream()
+	Thread(target = stream.start).start()
 	Thread(target = app.run(port='8080')).start()
 
 	
