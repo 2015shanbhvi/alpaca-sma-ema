@@ -50,7 +50,7 @@ class Stream:
 
 			#calculate crossover and execute buy/sell if necessary
 			if self.sma5.ready and self.sma8.ready and self.sma13.ready:
-				crossover.crossoverTradeDecision(self.sma5, self.sma8, self.sma13, self.closing_price, self.account, self.trade)
+				self.crossover.crossoverTradeDecision(self.sma5, self.sma8, self.sma13, closing_price, self.account, self.trade)
 			else:
 				print("SMAs not ready")
 
