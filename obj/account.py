@@ -20,6 +20,6 @@ class Account:
 	def getNumShares(self, symbol):
 		self.fillPositionsDict() #populate the dict first
 		if symbol in self.positions.keys():
-			return self.positions["symbol"]
+			return self.positions[symbol]
 		return 0
 		
