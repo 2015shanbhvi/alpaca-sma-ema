@@ -58,13 +58,13 @@ class Crossover:
 		self.calculateCrossover(sma5.sma, sma8.sma, sma13.sma, closing_price)
 		numshares = account.getNumShares("AAPL")
 		#if can buy
-		if self.golden_cross and numshares < 50:
-			print("Buying one share of AAPL")
-			trade.create_order("AAPL", 1, "buy", "market", "gtc")
+		if self.golden_cross and numshares < 100:
+			print("Buying five shares of AAPL")
+			trade.create_order("AAPL", 5, "buy", "market", "gtc")
 			print(account.positions)
 		#if can sell
 		elif self.death_cross and numshares > 0:
-			print("Selling one share of AAPL")
-			trade.create_order("AAPL", 1, "sell", "market", "gtc")
+			print("Selling five shares of AAPL")
+			trade.create_order("AAPL", 5, "sell", "market", "gtc")
 			print(account.positions)
 
