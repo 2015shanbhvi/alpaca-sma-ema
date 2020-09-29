@@ -3,10 +3,12 @@ from threading import Thread
 from flask import Flask, request
 from flask_restful import Api
 from flask_jsonpify import jsonify
+import sys, logging
 
 app = Flask(__name__)
 api = Api(app)
 
+stream = Stream()
 
 @app.route('/')
 def hello():
@@ -15,7 +17,11 @@ def hello():
 @app.route('/getHistory')
 def get(): 
 	retval = "GET request from class History"
-	return jsonify(retval)
+	print('This is standard output')
+	sys.stdout.flush()
+	app.logger.info('testing info log')
+	stream.account.fillPositionsDict()
+	return jsonify(stream.account.positions)
 
 
 def main():
@@ -25,7 +31,7 @@ def main():
 	
 	# stream()
 	# app.run(port='8080')
-	stream = Stream()
+	#stream = Stream()
 	Thread(target = stream.start).start()
 	Thread(target = app.run(port='8080')).start()
 
