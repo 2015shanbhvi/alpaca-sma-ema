@@ -16,7 +16,7 @@ class Stream:
 		self.crossover = Crossover() #to calculate crossover indicators
 		self.account = Account() #to list Account metadata
 		self.trade = Trade()  #to place orders
-
+		self.started = False
 
 	def on_open(self, ws):
 		print("opened websocket")
@@ -64,6 +64,7 @@ class Stream:
 	#Contains the websocket
 	#and instantiates Crossover, Account, SMA, and Trade objects
 	def start(self):
+		self.started = True
 		socket = "wss://data.alpaca.markets/stream"
 		ws = websocket.WebSocketApp(socket, on_open=self.on_open, on_message=self.on_message, on_error=self.on_error, on_close=self.on_close)
 		ws.run_forever()

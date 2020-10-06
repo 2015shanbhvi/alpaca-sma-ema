@@ -8,11 +8,14 @@ import sys, logging
 app = Flask(__name__)
 api = Api(app)
 
-
+stream = Stream()
 
 @app.route('/')
 def hello():
-   return stream.start()
+	if not stream.started:
+		return stream.start()
+	else:
+		return "Stream already started"
 
 @app.route('/getHistory')
 def get(): 
@@ -35,7 +38,6 @@ def main():
 	
 
 if __name__ == "__main__":
-	stream = Stream()
 	app.run(host='0.0.0.0', port='8080', debug=True)
 	#main()
 
