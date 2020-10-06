@@ -1,4 +1,4 @@
-from stream import *
+from stream import Stream
 from threading import Thread
 from flask import Flask, request
 from flask_restful import Api
@@ -8,20 +8,17 @@ import sys, logging
 app = Flask(__name__)
 api = Api(app)
 
-stream = Stream()
+
 
 @app.route('/')
 def hello():
-   return "Welcome to the Alpaca trade bot"
+   return stream.start()
 
 @app.route('/getHistory')
 def get(): 
-	retval = "GET request from class History"
-	print('This is standard output')
-	sys.stdout.flush()
-	app.logger.info('testing info log')
-	stream.account.fillPositionsDict()
-	return jsonify(stream.account.positions)
+	return "this is getHistory"
+	# stream.account.fillPositionsDict()
+	# return jsonify(stream.account.positions)
 
 
 def main():
@@ -38,5 +35,7 @@ def main():
 	
 
 if __name__ == "__main__":
-    main()
+	stream = Stream()
+	app.run(host='0.0.0.0', port='8080', debug=True)
+	#main()
 
