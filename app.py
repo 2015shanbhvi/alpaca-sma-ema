@@ -13,9 +13,9 @@ stream = Stream()
 @app.route('/')
 def hello():
 	if not stream.started:
-		return stream.start()
-	else:
-		return "Stream already started"
+		stream.started = True
+		Thread(target = stream.start).start()
+	return "Started stream in hello()"
 
 @app.route('/getHistory')
 def get(): 
