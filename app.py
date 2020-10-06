@@ -19,7 +19,8 @@ def hello():
 
 @app.route('/getHistory')
 def get(): 
-	return "this is getHistory"
+	stream.account.fillPositionsDict()
+	return stream.account.positions
 	# stream.account.fillPositionsDict()
 	# return jsonify(stream.account.positions)
 
